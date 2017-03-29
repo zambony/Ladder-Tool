@@ -195,6 +195,20 @@ if (SERVER) then
 			end;
 		end);
 	end);
+	
+	hook.Add("PostCleanupMap", "zladder_SaveLadders", function()
+		local win, msg = pcall(LoadLadders);
+		if (!win) then
+			ErrorNoHalt("[LADDER TOOL] Something happened while loading ladders!")
+			print(msg);
+		end;
+
+		local win, msg = pcall(LoadDismounts);
+		if (!win) then
+			ErrorNoHalt("[LADDER TOOL] Something happened while loading dismounts!")
+			print(msg);
+		end;
+	end);
 end;
 
 hook.Add("FindUseEntity", "zladder", function(player, ent)
